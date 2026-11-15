@@ -28,7 +28,23 @@ export function incrementAt(matrix, row, col) {
 //   stats([[1, 0], [3, 4]])  →  { sum: 8, average: 2, max: 4, nonZero: 3 }
 // average = sum ÷ the number of cells. An empty matrix, [], gives 0 for all four.
 export function stats(matrix) {
-  throw new Error("TODO");
+  let sum = 0;
+  let count = 0;
+  let nonZero = 0;
+  let max = 0;
+
+  for (const row of matrix) {
+    for (const value of row) {
+      sum += value;
+      count += 1;
+
+      if (value !== 0) nonZero += 1;
+      if (count === 1 || value > max) max = value;
+    }
+  }
+
+  const average = count === 0 ? 0 : sum / count;
+  return { sum, average, max, nonZero };
 }
 
 // Section 12 (stretch) — the same shape, every cell 0.
